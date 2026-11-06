@@ -22,7 +22,7 @@ for u in r.get("result", []):
         continue
     print("FORWARD:", post["message_id"])
     for ch in channels:
-        res = requests.post(f"{API}/copyMessage", json={
+        res = requests.post(f"{API}/forwardMessage", json={
             "chat_id": ch,
             "from_chat_id": chat["id"],
             "message_id": post["message_id"]})

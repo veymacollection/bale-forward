@@ -42,3 +42,6 @@
 @shopingbag
 @bagshop_ir
 @khale_arzun
+@amora_luna
+@chanel_dior
+@BotFathar

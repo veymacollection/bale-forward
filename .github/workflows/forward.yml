@@ -1,0 +1,27 @@
+name: forward
+on:
+  schedule:
+    - cron: "*/5 * * * *"
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency: forward
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install requests
+      - run: python forward.py
+        env:
+          BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
+          SOURCE_CHANNEL: ${{ secrets.SOURCE_CHANNEL }}
+      - run: |
+          git config user.name bot
+          git config user.email bot@users.noreply.github.com
+          git add state.json
+          git commit -m "state" || true
+          git push
